@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Your Collection</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/magic-font.css">
+</head>
+<body style="margin: 0px; background-color: #F8F2CF; color: black">
+	
+	<br></br>
+	
+	<input type="text" id="myInput" onkeyup="myFunction()"
+		placeholder="Search by Card Name or Set Name" title="Type in a name"
+		style="position: fixed; width: 20%; background-color: #F8F2CF; float: right; align: right;">
+		
+	<br></br>
+	
+	<div id="demo"
+		style="float: left; width: 50%; position: fixed; align: left"></div>
+
+
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-10 mx-auto">
+				<h1 class="oldschool">Your Collection</h1>
+				<!--display error if any-->
+
+				<div class="alert alert-danger" role="alert" th:if="${!status}">
+					<strong>Error:</strong> <span th:text="${message}"></span> <br></br>
+				</div>
+
+				<!--display cards list-->
+				<br></br>
+				<table class="table table-striped" id="myTable" style="color: black"
+					th:if="${status}">
+					<thead>
+						<tr>
+							<th scope="col" class="oldschool">#</th>
+							<th scope="col" class="oldschool">Card Name</th>
+							<th scope="col" class="oldschool">Set Name</th>
+							<th scope="col" class="oldschool">Number in Collection</th>
+							<th scope="col" class="oldschool">Foil</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="card, i : ${cards}">
+							<th scope="row" th:text="${i.index + 1}"></th>
+							<td th:text="${card.name}" class="oldschool"></td>
+							<td th:text="${card.setName}"></td>
+							<td th:text="${card.numColl}"></td>
+							<td th:text="${card.foil}"></td>
+							<td><div th:attr="data-id=${card.name}" type="button"
+									onclick="loadDoc(this.getAttribute('data-id'))">Show Card</div></td>
+						</tr>
+					</tbody>
+				</table>
+				<script>
+					function loadDoc(thename) {
+						namerequest = "https://api.scryfall.com/cards/named?fuzzy="
+								+ thename
+						var xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								var txt = this.responseText;
+								var obj = JSON.parse(txt);
+								document.getElementById("demo").innerHTML = "<img style='border-radius: 5%;'src="
+										+ obj.image_uris.normal + ">";
+							}
+						};
+						xhttp.open("GET", namerequest, true);
+						xhttp.send();
+					}
+					function myFunction() {
+						var input, filter, table, tr, td, i, txtValue;
+						input = document.getElementById("myInput");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("myTable");
+						tr = table.getElementsByTagName("tr");
+						for (i = 0; i < tr.length; i++) {
+							var rowContent = tr[i].textContent;
+							rowContent = rowContent.replace(/[\s]+/g, ' ');   
+							if (rowContent) {
+								if (rowContent.toUpperCase().includes(filter) || i==0) {
+									tr[i].style.display = "";
+								} else {
+									tr[i].style.display = "none";
+								}
+							}
+
+						}
+					}
+				</script>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

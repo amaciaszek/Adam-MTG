@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'MagicMedieval';
+    src: url('MagicMedieval.eot');
+    src: url('MagicMedieval.eot?#iefix') format('embedded-opentype'),
+        url('MagicMedieval.woff2') format('woff2'),
+        url('MagicMedieval.woff') format('woff'),
+        url('MagicMedieval.ttf') format('truetype'),
+        url('MagicMedieval.svg#MagicMedieval') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+  font-family: 'Mplantin';
+  src: url('../fonts/Mplantin.eot');
+  src: url('../fonts/Mplantin.woff') format('woff'), 
+       url('../fonts/Mplantin.ttf') format('truetype'), 
+       url('../fonts/Mplantin.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+	font-family: 'Mplantin';
+	font-weight: normal;
+	font-style: normal
+}
+.oldschool{
+	color: black;
+	font-family: 'MagicMedieval';
+	font-weight: normal;
+	font-style: normal
+}

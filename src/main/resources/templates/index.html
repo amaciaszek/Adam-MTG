@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Explore Your Collection</title>
+
+<!--Bootstrap 4-->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/magic-font.css">
+</head>
+<body style="margin: 0px; background-color: #F8F2CF;">
+
+	<div class="container py-5">
+		<div class="row">
+			<div class="col-6 mx-auto">
+				<h1
+					style="color: black; font-family: 'MagicMedieval'; font-weight: normal; font-style: normal">Upload
+					your Collection</h1>
+					<form method="get" action="files/my_collection.csv">
+							<button
+								style="background-color: #eed9c4; border: black; color: black; font-family: 'MagicMedieval'; font-weight: normal; font-style: normal;"
+								type="submit">Download Example Collection Format</button>
+						</form>
+				<form method="POST" th:action="@{/upload-csv-file}"
+					enctype="multipart/form-data">
+					<div class="form-group mt-3">
+						<label
+							style="color: black; font-family: 'MagicMedieval'; font-weight: normal; font-style: normal;"
+							for="file">Select a CSV file</label> <input type="file"
+							name="file" class="form-control-file" id="file" accept=".csv">
+						
+					</div>
+					<button type="submit" class="btn btn-primary"
+						style="background-color: #eed9c4; border: black; color: black; font-family: 'MagicMedieval'; font-weight: normal; font-style: normal;">Import
+						Your Cards</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
